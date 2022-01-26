@@ -64,7 +64,7 @@ class AwsomeGraphics:
 
     def pointmaker(self):
         for point in self.pointlist:
-            self.canvas.create_oval(point.x-1, point.y-1, point.x+1, point.y+1, fill='black')
+            self.canvas.create_oval(point.x-2, point.y-2, point.x+2, point.y+2, fill='black')
     
     def linemaker(self):
         existing_lines = []
