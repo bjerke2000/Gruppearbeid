@@ -5,8 +5,8 @@ from os import getcwd, path, remove
 class TextFile:
     def __init__(self, name, fpath) -> None:
         self.__name = name
-        self.__filepath = path.abspath(fpath)
-    
+        self.__filepath = path.abspath(name)
+
     @property
     def name(self):
         return self.__name
@@ -32,16 +32,19 @@ class TextFile:
         remove(self.__filepath.join(self.__name))
 
     def load(self):
-        with open(self.__filepath.join(self.__name), 'r+', encoding = 'utf-8', newline = "\n")as f:
-            self.doc = f.readlines().rstrip('\n')
+        with open(self.__filepath, 'r+', encoding = 'utf-8', newline = "\n")as f:
+            self.doc = f.readlines()
+            self.new_doc = []
+            for x in self.doc:
+                self.new_doc.append(x.rstrip('\n'))   
     
     def save(self):
-        with open(self.__filepath.join(self.__name), "w", encoding = 'utf-8', newline = "\n") as file:
-            file.writelines(self.doc)
+        with open(self.__filepath, "w", encoding = 'utf-8', newline = "\n") as file:
+            for line in self.new_doc:
+                file.writelines(line + "\n")
 
-print(getcwd())
-print(path.abspath("/28.01"))
-file = TextFile('ducoment.txt', '/28.01')
+
+file = TextFile('ducoment.txt', '')
 
 file.load()
 file.save()
